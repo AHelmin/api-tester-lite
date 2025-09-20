@@ -1,5 +1,5 @@
 
-import { Container, Navbar, Nav, Card, Button, Form, Row, Col } from 'react-bootstrap';
+import { Container, Navbar, Nav, Card, Button, Form, Row, Col, DropdownMenu } from 'react-bootstrap';
 import './App.css'
 
 export default function App() {
@@ -30,39 +30,17 @@ export default function App() {
                 <Form.Label>Request Type</Form.Label>
                 <Form.Control type="email" placeholder="Please enter request url" />
               </Form.Group>
-
-              <Form.Group as={Row} className="mb-3">
-                <Form.Label as="legend" column sm={3}>
-                  Please Select Method
-                </Form.Label>
-                <Col sm={10}>
-                  <Form.Check
-                    type="radio"
-                    label="GET"
-                    name="formHorizontalRadios"
-                    id="formHorizontalRadios1"
-                  />
-                  <Form.Check
-                    type="radio"
-                    label="POST"
-                    name="formHorizontalRadios"
-                    id="formHorizontalRadios2"
-                  />
-                  <Form.Check
-                    type="radio"
-                    label="PUT"
-                    name="formHorizontalRadios"
-                    id="formHorizontalRadios3"
-                  />
-                   <Form.Check
-                    type="radio"
-                    label="PUT"
-                    name="formHorizontalRadios"
-                    id="formHorizontalRadios3"
-                  />
-                </Col>
-              </Form.Group>
-
+              <Form.Select aria-label="Default select example">
+                <option>Please select HTTP method</option>
+                <option value="1">GET</option>
+                <option value="2">POST</option>
+                <option value="3">PUT</option>
+                <option value="4">DELETE</option>
+              </Form.Select>
+              <div className="d-flex gap-2 mt-3">
+                <Button variant="primary">Send</Button>
+                <Button variant="outline-secondary">Clear</Button>
+              </div>
             </Form>
           </Card.Body>
         </Container>
