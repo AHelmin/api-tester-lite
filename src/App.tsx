@@ -28,7 +28,7 @@ export default function App() {
             <Form>
               <Form.Group className="mb-3" controlId="formGroupEmail">
                 <Form.Label>Request Type</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
+                <Form.Control type="email" placeholder="Please enter request url" />
               </Form.Group>
 
               <Form.Group as={Row} className="mb-3">
