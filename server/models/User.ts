@@ -4,6 +4,7 @@ export interface IUser extends mongoose.Document {
     username: string;
     email: string;
     password: string;
+    queryHistory: string[];
 }
 
 const userSchema = new mongoose.Schema<IUser>({
@@ -29,6 +30,10 @@ const userSchema = new mongoose.Schema<IUser>({
         trim: true,
         select: false,
     },
+    queryHistory: {
+        type: [String],
+        default: [],
+    }, 
     
 }, {
     timestamps: true,
