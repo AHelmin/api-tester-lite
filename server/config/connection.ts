@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 async function connectDB() {
     try {
-        await mongoose.connect('mongodb://127.0.0.1:27017/api-tester-lite');
+        await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/api-tester-lite');
         console.log('MongoDB connected!')
     } catch (err) {
         console.error('MongoDB connection error:', err)
@@ -10,4 +10,4 @@ async function connectDB() {
     }
 }
 
-export default connectDB();
+export default connectDB;
