@@ -1,7 +1,7 @@
 
 
 import { Router } from 'express';
-import apiRoutes from './api/user.routes.ts';
+import apiRoutes from './api/index.js';
 
 const router = Router();
 

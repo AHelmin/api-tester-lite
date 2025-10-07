@@ -23,7 +23,9 @@ if (process.env.NODE_ENV === 'production') {
     });
 };
 
-async () => {
+async function connect() {
     await connectDB();
     app.listen(PORT, () => console.log(`Now listening on localhost: ${PORT}`));
-}
+};
+
+connect();
