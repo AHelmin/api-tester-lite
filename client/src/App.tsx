@@ -1,12 +1,23 @@
-
-import { Container, Navbar, Nav, Card, Button, Form, Row, Col, DropdownMenu } from 'react-bootstrap';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { Home } from './pages/index'
+import { useState, useEffect } from 'react';
+import { Container, Navbar, Nav } from 'react-bootstrap';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Home, History, Auth } from './pages/index'
 import './App.css'
 
 export default function App() {
 
+  const [isLoggedIn, setIsLoggedIn] = useState(true)
 
+  // function verifyUser() {
+  //   const cookie = Cookie.get('auth_cookie');
+  //   if(!cookie) {
+  //     setIsLoggedIn(false)
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   verifyUser()
+  // }, [])
 
   return (
     <>
@@ -17,9 +28,9 @@ export default function App() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href='#history'>History</Nav.Link>
-              <Nav.Link href="#logout">Logout</Nav.Link>
+              {isLoggedIn ? <Nav.Link href="/">Home</Nav.Link> : <Nav.Link href="/auth">Auth</Nav.Link>}
+              <Nav.Link href='/history'>History</Nav.Link>
+              <Nav.Link href="/logout">Logout</Nav.Link>
               <Navbar.Text>
                 Signed in as: 'Placeholder'
               </Navbar.Text>
@@ -30,6 +41,8 @@ export default function App() {
 
       <Routes>
       <Route path='/' element={<Home />} />
+      <Route path='/history' element={<History />} />
+      <Route path='/auth' element={<Auth />} />
       </Routes>
     </BrowserRouter >
 

@@ -3,12 +3,12 @@ import { Container, Card, Button, Form } from 'react-bootstrap';
 
 export default function Home() {
     
-    function onSendClick(e: React.MouseEvent<HTMLFormElement>) {
+    function onSendClick(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
     
       }
     
-      function onClearClick(e: React.MouseEvent<HTMLFormElement>) {
+      function onClearClick(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
       }
 
