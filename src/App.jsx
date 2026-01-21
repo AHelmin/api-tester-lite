@@ -7,6 +7,7 @@ import "/node_modules/bootstrap/dist/css/bootstrap.min.css";
 function App() {
   const [open, setOpen] = useState(false);
   const [method, setMethod] = useState("GET");
+  const [openNav, setOpenNav] = useState(false)
 
   return (
     <>
@@ -19,15 +20,14 @@ function App() {
             <button
               className="navbar-toggler"
               type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
               aria-controls="navbarNav"
-              aria-expanded="false"
+              onClick={() => setOpenNav((o) => !o)}
+              aria-expanded={openNav}
               aria-label="Toggle navigation"
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
+            <div className={`navbar-collapse ${openNav ? "show" : "collapse"}`}>
               <ul className="navbar-nav ms-auto">
                 <li className="nav-item">
                   <a className="nav-link active" aria-current="page" href="#">
