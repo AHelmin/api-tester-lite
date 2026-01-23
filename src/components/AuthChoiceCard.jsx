@@ -1,6 +1,6 @@
 
 
-export default function AuthChoiceCard({ onLogin, OnSignUp }) {
+export default function AuthChoiceCard({ onLogin, onSignUp }) {
 
   return (
     <>
@@ -13,7 +13,7 @@ export default function AuthChoiceCard({ onLogin, OnSignUp }) {
           <button className="btn btn-primary" onClick={onLogin}>Log In</button>
         </div>
         <div className="col-6">
-          <button className="btn btn-primary" onClick={OnSignUp}>Sign Up</button>
+          <button className="btn btn-primary" onClick={onSignUp}>Sign Up</button>
         </div>
       </div>
     </>
