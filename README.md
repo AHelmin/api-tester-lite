@@ -1,16 +1,18 @@
-# React + Vite
+# API Tester Lite (WIP)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+API Tester Lite is a work-in-progress web application designed to provide an interface for testing REST APIs directly in the browser.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The goal is to support common CRUD operations in a clean, minimal UI, similar to tools like Postman, but simplified for quick testing and demos.
 
-## React Compiler
+## Planned Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* Execute basic REST requests (GET, POST, PUT, DELETE)
+* View formatted request and response data
+* Optional user accounts to store limited request history
+* Guest mode for quick, no-signup testing
 
-## Expanding the ESLint configuration
+## Status
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Still under active development. Functionality and Ui are still evolving.
