@@ -49,20 +49,9 @@ function App() {
         </div>
       </nav>
       <div className="container text-center container-fluid">
-        <div className="row container-fluid">
-          <div className="col-12 col-lg-7 border border-light">
-            CRUD Column
-            <div className="row border border-light">
-              <div className="card">
-                {isLoggedIn ? <RequestForm /> : <AuthCard />}
-              </div>
-            </div>
-            <div className="row border border-light">
-              <h2>Results</h2>
-            </div>
-          </div>
-          <div className="col-12 col-lg-5 border border-light">
-            History Column
+        <div className="row justify-content-center">
+          <div className="card">
+            {isLoggedIn ? <RequestForm /> : <AuthCard />}
           </div>
         </div>
       </div>

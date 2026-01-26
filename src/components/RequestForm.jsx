@@ -70,6 +70,17 @@ export default function RequestForm() {
         <li className="list-group-item">A second item</li>
         <li className="list-group-item">A third item</li>
       </ul>
+      <pre>{method}</pre>
+      <div className="row container-fluid">
+        <div className="col-12 col-lg-7 border border-light">
+          <div className="row border border-light">
+            <h2>Results</h2>
+          </div>
+        </div>
+        <div className="col-12 col-lg-5 border border-light">
+          History Column
+        </div>
+      </div>
     </>
   );
 }
