@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
-export default function SignupForm() {
+export default function SignupForm({ goBack }) {
+    console.log("=== LOADED SignupForm FILE A ===");
+
   const [signUpData, setSignUpData] = useState("");
   const [ formMessage, setFormMessage ] = useState("")
 
@@ -81,8 +83,13 @@ export default function SignupForm() {
           ></input>
         </div>
         <button type="submit" className="btn btn-primary">
-          Login
+          Signup
         </button>
+        <button 
+        type="button" 
+        className="btn btn-link" 
+        onClick={goBack}
+        >Go Back</button>
       </form>
     </>
   );

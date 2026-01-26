@@ -2,6 +2,7 @@ import { useState } from "react";
 import { RequestForm, AuthCard } from "./components";
 // import './App.css'
 import "/node_modules/bootstrap/dist/css/bootstrap.min.css";
+import SignupForm from "./components/SignupForm";
 
 function App() {
   const [openNav, setOpenNav] = useState(false);
@@ -53,7 +54,7 @@ function App() {
             CRUD Column
             <div className="row border border-light">
               <div className="card">
-                <AuthCard />
+                {isLoggedIn ? <RequestForm /> : <AuthCard />}
               </div>
             </div>
             <div className="row border border-light">

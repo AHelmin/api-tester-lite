@@ -15,9 +15,9 @@ export default function AuthCard() {
         />
       )}
 
-      {view === "login" && <LoginForm onBack={() => setView("choice")} />}
+      {view === "login" && <LoginForm goBack={() => setView("choice")} />}
 
-      {view === "signup" && <SignupForm onBack={() => setView("choice")} />}
+      {view === "signup" && <SignupForm goBack={() => setView("choice")} />}
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function LoginForm() {
+export default function LoginForm({ goBack }) {
   const [loginData, setLoginData] = useState({});
   const [ formMessage, setFormMessage ] = useState("")
 
@@ -65,6 +65,11 @@ export default function LoginForm() {
           ></input>
         </div>
         <button type="submit" className="btn btn-primary">Login</button>
+        <button 
+        type="button" 
+        className="btn btn-link" 
+        onClick={goBack}
+        >Go Back</button>
       </form>
     </>
   );
