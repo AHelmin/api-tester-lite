@@ -8,16 +8,18 @@ export default function AuthCard() {
 
   return (
     <>
-      {view === "choice" && (
-        <AuthChoiceCard
-          onLogin={() => setView("login")}
-          onSignUp={() => setView("signup")}
-        />
-      )}
+      <div className="card">
+        {view === "choice" && (
+          <AuthChoiceCard
+            onLogin={() => setView("login")}
+            onSignUp={() => setView("signup")}
+          />
+        )}
 
-      {view === "login" && <LoginForm goBack={() => setView("choice")} />}
+        {view === "login" && <LoginForm goBack={() => setView("choice")} />}
 
-      {view === "signup" && <SignupForm goBack={() => setView("choice")} />}
+        {view === "signup" && <SignupForm goBack={() => setView("choice")} />}
+      </div>
     </>
   );
 }

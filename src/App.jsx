@@ -6,7 +6,7 @@ import SignupForm from "./components/SignupForm";
 
 function App() {
   const [openNav, setOpenNav] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <>
@@ -50,9 +50,7 @@ function App() {
       </nav>
       <div className="container text-center container-fluid">
         <div className="row justify-content-center">
-          <div className="card">
-            {isLoggedIn ? <RequestForm /> : <AuthCard />}
-          </div>
+          {isLoggedIn ? <RequestForm /> : <AuthCard />}
         </div>
       </div>
       <footer className="bg-body-tertiary text-center py-3">
