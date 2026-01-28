@@ -1,4 +1,4 @@
-export default function AuthChoiceCard({ onLogin, onSignUp }) {
+export default function AuthChoiceCard({ onLogin, onSignUp, onContinueAsGuest }) {
   return (
     <>
       <h5>
@@ -11,6 +11,9 @@ export default function AuthChoiceCard({ onLogin, onSignUp }) {
         </button>
         <button className="btn btn-primary" onClick={onSignUp}>
           Sign Up
+        </button>
+        <button className="btn btn-primary" onClick={onContinueAsGuest}>
+          Continue as Guest
         </button>
       </div>
     </>

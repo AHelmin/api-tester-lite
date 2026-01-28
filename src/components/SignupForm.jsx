@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 
 export default function SignupForm({ goBack }) {
-    console.log("=== LOADED SignupForm FILE A ===");
-
   const [signUpData, setSignUpData] = useState("");
   const [ formMessage, setFormMessage ] = useState("")
 

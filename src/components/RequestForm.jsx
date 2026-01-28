@@ -3,6 +3,11 @@ import { useState } from "react";
 export default function RequestForm() {
   const [open, setOpen] = useState(false);
   const [method, setMethod] = useState("GET");
+  const [url, setUrl] = useState("");
+
+  function handleUrlChange(e) {
+    setUrl(e.target.value);
+  }
 
   return (
     <>
@@ -68,19 +73,41 @@ export default function RequestForm() {
               </ul>
             </div>
           </li>
-          <li className="list-group-item">A second item</li>
-          <li className="list-group-item">A third item</li>
+          <li className="list-group-item">
+            <label htmlFor="url">Please enter Request URL: </label>
+            <input
+              type="url"
+              name="url"
+              className="form-control"
+              id="url"
+              placeholder=""
+              onChange={handleUrlChange}
+            ></input>
+          </li>
+          {(method === "PUT" || method === "POST") && (
+            <li className="list-group-item">
+              Request Body
+              <div className="form-floating">
+                <textarea
+                  className="form-control"
+                  placeholder="Leave a comment here"
+                  id="request-body"
+                ></textarea>
+                <label htmlFor="request-body">Enter request body</label>
+              </div>
+            </li>
+          )}
         </ul>
         <pre>{method}</pre>
-        <div className="row container-fluid">
-          <div className="col-12 col-lg-7 border border-light">
-            <div className="row border border-light">
-              <h2>Results</h2>
-            </div>
+      </div>
+      <div className="row container-fluid">
+        <div className="col-12 col-lg-7 border border-light">
+          <div className="row border border-light">
+            <h2>Results</h2>
           </div>
-          <div className="col-12 col-lg-5 border border-light">
-            History Column
-          </div>
+        </div>
+        <div className="col-12 col-lg-5 border border-light">
+          History Column
         </div>
       </div>
     </>

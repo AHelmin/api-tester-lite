@@ -3,7 +3,7 @@ import AuthChoiceCard from "./AuthChoiceCard";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 
-export default function AuthCard() {
+export default function AuthCard({ onAuthSuccess }) {
   const [view, setView] = useState("choice");
 
   return (
@@ -13,6 +13,7 @@ export default function AuthCard() {
           <AuthChoiceCard
             onLogin={() => setView("login")}
             onSignUp={() => setView("signup")}
+            onContinueAsGuest={onAuthSuccess}
           />
         )}
 

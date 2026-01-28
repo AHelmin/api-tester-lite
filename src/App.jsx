@@ -2,7 +2,6 @@ import { useState } from "react";
 import { RequestForm, AuthCard } from "./components";
 // import './App.css'
 import "/node_modules/bootstrap/dist/css/bootstrap.min.css";
-import SignupForm from "./components/SignupForm";
 
 function App() {
   const [openNav, setOpenNav] = useState(false);
@@ -39,9 +38,13 @@ function App() {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link active" href="#">
+                  <button
+                    type="button"
+                    className="btn btn-link"
+                    onClick={() => setIsLoggedIn(false)}
+                  >
                     Logout
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>
@@ -50,7 +53,11 @@ function App() {
       </nav>
       <div className="container text-center container-fluid">
         <div className="row justify-content-center">
-          {isLoggedIn ? <RequestForm /> : <AuthCard />}
+          {isLoggedIn ? (
+            <RequestForm />
+          ) : (
+            <AuthCard onAuthSuccess={() => setIsLoggedIn(true)} />
+          )}
         </div>
       </div>
       <footer className="bg-body-tertiary text-center py-3">
