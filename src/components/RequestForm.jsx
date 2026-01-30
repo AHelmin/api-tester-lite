@@ -29,6 +29,7 @@ export default function RequestForm() {
     //if POST or PUT then options need to be added
     if (method === "POST" || method === "PUT") {
       const parsed = isValidJson(requestBody);
+      console.log(parsed)
 
         if (parsed === null) {
             setRequestBody('Please enter valid JSON');
@@ -117,6 +118,7 @@ export default function RequestForm() {
                 className="form-control"
                 id="url"
                 placeholder=""
+                value={url}
                 onChange={handleUrlChange}
               ></input>
             </li>
@@ -126,11 +128,12 @@ export default function RequestForm() {
                 <div className="form-floating">
                   <textarea
                     className="form-control"
-                    placeholder="Leave a comment here"
+                    placeholder="Enter request body. Must be valid JSON."
                     id="request-body"
                     onChange={handleRequestBodyChange}
+                    value={requestBody}
                   ></textarea>
-                  <label htmlFor="request-body">Enter request body</label>
+                  <label htmlFor="request-body">Must be valid JSON</label>
                 </div>
               </li>
             )}
