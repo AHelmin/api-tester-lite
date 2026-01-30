@@ -5,14 +5,35 @@ export default function RequestForm() {
   const [method, setMethod] = useState("GET");
   const [url, setUrl] = useState("");
   const [results, setResults] = useState("");
+  const [requestBody, setRequestBody] = useState("");
+  const [validJson, setValidJson] = useState(true);
 
   function handleUrlChange(e) {
     setUrl(e.target.value);
   }
 
+  function isValidJson(str) {
+    try {
+      const parsed = JSON.parse(str);
+      return parsed;
+    } catch (err) {
+      setValidJson(false);
+      return;
+    }
+  }
+
   async function handleSend(e) {
     e.preventDefault();
-    const res = await fetch(url);
+    const options = { method };
+    let parsed;
+    //if POST or PUT then options need to be added
+    if (method === "POST" || method === "PUT") {
+      parsed = isValidJson(requestBody);
+      options.headers = { "Content-Type": "application/json" };
+      options.body = JSON.stringify(parsed);
+    }
+
+    const res = await fetch(url, options);
     const data = await res.json();
     setResults(data);
   }
@@ -119,7 +140,7 @@ export default function RequestForm() {
         <div className="col-12 col-lg-7 border border-light">
           <div className="row border border-light">
             <h2>Results</h2>
-            {results && <pre>{JSON.stringify(results)}</pre>}
+            {results && <pre>{JSON.stringify(results, null, 2)}</pre>}
           </div>
         </div>
         <div className="col-12 col-lg-5 border border-light">
