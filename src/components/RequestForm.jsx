@@ -6,29 +6,35 @@ export default function RequestForm() {
   const [url, setUrl] = useState("");
   const [results, setResults] = useState("");
   const [requestBody, setRequestBody] = useState("");
-  const [validJson, setValidJson] = useState(true);
 
   function handleUrlChange(e) {
     setUrl(e.target.value);
   }
 
+  function handleRequestBodyChange(e) {
+    setRequestBody(e.target.value);
+  }
+
   function isValidJson(str) {
     try {
-      const parsed = JSON.parse(str);
-      return parsed;
-    } catch (err) {
-      setValidJson(false);
-      return;
+     return JSON.parse(str);
+    } catch {
+      return null;
     }
   }
 
   async function handleSend(e) {
     e.preventDefault();
     const options = { method };
-    let parsed;
     //if POST or PUT then options need to be added
     if (method === "POST" || method === "PUT") {
-      parsed = isValidJson(requestBody);
+      const parsed = isValidJson(requestBody);
+
+        if (parsed === null) {
+            setRequestBody('Please enter valid JSON');
+            return;
+        }
+
       options.headers = { "Content-Type": "application/json" };
       options.body = JSON.stringify(parsed);
     }
@@ -122,6 +128,7 @@ export default function RequestForm() {
                     className="form-control"
                     placeholder="Leave a comment here"
                     id="request-body"
+                    onChange={handleRequestBodyChange}
                   ></textarea>
                   <label htmlFor="request-body">Enter request body</label>
                 </div>
