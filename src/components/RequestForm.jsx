@@ -3,9 +3,10 @@ import { useState } from "react";
 export default function RequestForm() {
   const [open, setOpen] = useState(false);
   const [method, setMethod] = useState("GET");
-  const [url, setUrl] = useState("");
-  const [results, setResults] = useState("");
-  const [requestBody, setRequestBody] = useState("");
+  const [url, setUrl] = useState('');
+  const [results, setResults] = useState('');
+  const [requestBody, setRequestBody] = useState('');
+  const [bodyError, setBodyError] = useState('')
 
   function handleUrlChange(e) {
     setUrl(e.target.value);
@@ -13,6 +14,7 @@ export default function RequestForm() {
 
   function handleRequestBodyChange(e) {
     setRequestBody(e.target.value);
+    setBodyError('')
   }
 
   function isValidJson(str) {
@@ -32,7 +34,9 @@ export default function RequestForm() {
       console.log(parsed)
 
         if (parsed === null) {
-            setRequestBody('Please enter valid JSON');
+            // **This needs to be changed, this error should never overwrite the requestbody, rahter a new message should 
+            //show up under the request body input
+            setBodyError('Please enter valid JSON');
             return;
         }
 
@@ -124,7 +128,7 @@ export default function RequestForm() {
             </li>
             {(method === "PUT" || method === "POST") && (
               <li className="list-group-item">
-                Request Body
+                Request Body - must be valid JSON
                 <div className="form-floating">
                   <textarea
                     className="form-control"
@@ -133,7 +137,8 @@ export default function RequestForm() {
                     onChange={handleRequestBodyChange}
                     value={requestBody}
                   ></textarea>
-                  <label htmlFor="request-body">Must be valid JSON</label>
+                  {bodyError && <div className="text-danger">{bodyError}</div>}
+                  {/* <label htmlFor="request-body">Must be valid JSON</label> */}
                 </div>
               </li>
             )}
