@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { RequestForm, AuthCard } from "./components";
+import { RequestForm, AuthCard, History } from "./components";
 // import './App.css'
 import "/node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [openNav, setOpenNav] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [view, setView] = useState('home')
 
   return (
     <>
@@ -28,14 +29,22 @@ function App() {
             <div className={`navbar-collapse ${openNav ? "show" : "collapse"}`}>
               <ul className="navbar-nav ms-auto">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#">
+                  <button
+                  type="button"
+                  className="btn"
+                  onClick={() => setView('home')}
+                  >
                     Home
-                  </a>
+                  </button>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link active" href="#">
-                    Results
-                  </a>
+                <button
+                  type="button"
+                  className="btn"
+                  onClick={() => setView('history')}
+                  >
+                    History
+                  </button>
                 </li>
                 <li className="nav-item">
                   <button
@@ -53,11 +62,9 @@ function App() {
       </nav>
       <div className="container text-center container-fluid">
         <div className="row justify-content-center">
-          {isLoggedIn ? (
-            <RequestForm />
-          ) : (
-            <AuthCard onAuthSuccess={() => setIsLoggedIn(true)} />
-          )}
+          {!isLoggedIn && <AuthCard onAuthSuccess={() => setIsLoggedIn(true)} />}
+          {isLoggedIn && view === 'home' && <RequestForm />}
+          {isLoggedIn && view ==='history' && <History />}
         </div>
       </div>
       <footer className="bg-body-tertiary text-center py-3">

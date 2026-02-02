@@ -151,17 +151,10 @@ export default function RequestForm() {
         </form>
         <pre>{method}</pre>
       </div>
-      <div className="row container-fluid">
-        <div className="col-12 col-lg-7 border border-light">
           <div className="row border border-light">
             <h2>Results</h2>
             {results && <pre>{JSON.stringify(results, null, 2)}</pre>}
-          </div>
-        </div>
-        <div className="col-12 col-lg-5 border border-light">
-          History Column
-        </div>
-      </div>
+          </div> 
     </>
   );
 }
