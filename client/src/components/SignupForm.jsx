@@ -43,7 +43,7 @@ export default function SignupForm({ goBack }) {
       <form className="form" onSubmit={submitSignup}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
-            Name
+            Username
           </label>
           <input
             type="name"
