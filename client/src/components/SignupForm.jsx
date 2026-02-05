@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 export default function SignupForm({ goBack }) {
   const [signUpData, setSignUpData] = useState("");
-  const [ formMessage, setFormMessage ] = useState("")
+  const [formMessage, setFormMessage] = useState("")
 
   async function submitSignup(e) {
     e.preventDefault();
@@ -14,28 +14,28 @@ export default function SignupForm({ goBack }) {
           "Content-Type": "application/json",
         },
       }).catch((err) => {
-        setFormMessage("Sorry, we couldn't sign you up. Get a life.");
+        setFormMessage("Sorry, we couldn't sign you up.");
       });
 
       const result = await query.json();
       if (result.status === "error") {
-        setFormMessage("Sorry, we couldn't sign you up. Get a life.");
+        setFormMessage("Sorry, we couldn't sign you up.");
       } else {
         window.location.href = "/";
       }
     } catch (err) {
-      setFormMessage("Sorry, we couldn't sign you up. Get a life.");
+      setFormMessage("Sorry, we couldn't sign you up.");
     }
   }
 
   function handleSignupChange(e) {
-    setFormMessage();
+    setFormMessage('');
     setSignUpData({ ...signUpData, [e.target.name]: e.target.value });
   }
 
-  useEffect(() => {
-    console.log(signUpData)
-  },[signUpData])
+  // useEffect(() => {
+  //   console.log(signUpData)
+  // },[signUpData])
 
   return (
     <>
@@ -92,6 +92,8 @@ export default function SignupForm({ goBack }) {
         onClick={goBack}
         >Go Back</button>
       </form>
+      {/* Display error message on failed signup */}
+      {formMessage && <h4>{formMessage}</h4>}
     </>
   );
 }

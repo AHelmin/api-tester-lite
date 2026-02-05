@@ -30,9 +30,9 @@ export default function LoginForm({ goBack }) {
     }
   }
 
-  useEffect(() => {
-    console.log(loginData)
-  },[loginData])
+  // useEffect(() => {
+  //   console.log(loginData)
+  // },[loginData])
 
   return (
     <>
@@ -73,6 +73,7 @@ export default function LoginForm({ goBack }) {
         onClick={goBack}
         >Go Back</button>
       </form>
+      {formMessage && <h4>{formMessage}</h4>}
     </>
   );
 }

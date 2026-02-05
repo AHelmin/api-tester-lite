@@ -18,7 +18,7 @@ export default function AuthCard({ onAuthSuccess }) {
             onContinueAsGuest={onAuthSuccess}
           />
         )}
-
+        {/* load component based on state set by user choice */}
         {view === "login" && <LoginForm goBack={() => setView("choice")} />}
 
         {view === "signup" && <SignupForm goBack={() => setView("choice")} />}
