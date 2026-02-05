@@ -51,6 +51,7 @@ export default function SignupForm({ goBack }) {
             className="form-control"
             id="name"
             placeholder="name"
+            value={signUpData.name}
             onChange={handleSignupChange}
           ></input>
         </div>
@@ -64,6 +65,7 @@ export default function SignupForm({ goBack }) {
             className="form-control"
             id="email"
             placeholder="name@example.com"
+            value={signUpData.email}
             onChange={handleSignupChange}
           ></input>
         </div>
@@ -77,6 +79,7 @@ export default function SignupForm({ goBack }) {
             className="form-control"
             id="password"
             placeholder=""
+            value={signUpData.password}
             onChange={handleSignupChange}
           ></input>
         </div>

@@ -4,6 +4,7 @@ import { RequestForm, AuthCard, History } from "./components";
 import "/node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
+  // Controls if the small screen navbar dropdown menu is open
   const [openNav, setOpenNav] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [view, setView] = useState('home')
@@ -26,6 +27,8 @@ function App() {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
+            {/* navbar expand/collapse uses React state instead of the bootstrap js.***NOTE: Styling needs
+            work. The expanded list does not origniate at the button, but rather on the left of the viewport.*** */}
             <div className={`navbar-collapse ${openNav ? "show" : "collapse"}`}>
               <ul className="navbar-nav ms-auto">
                 <li className="nav-item">
@@ -62,6 +65,7 @@ function App() {
       </nav>
       <div className="container text-center container-fluid">
         <div className="row justify-content-center">
+          {/* Controls which component loads based on state */}
           {!isLoggedIn && <AuthCard onAuthSuccess={() => setIsLoggedIn(true)} />}
           {isLoggedIn && view === 'home' && <RequestForm />}
           {isLoggedIn && view ==='history' && <History />}

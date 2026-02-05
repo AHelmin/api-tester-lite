@@ -9,6 +9,8 @@ export default function AuthCard({ onAuthSuccess }) {
   return (
     <>
       <div className="card">
+        {/* Option to login or signup loads respective component, 
+        option to continue as guest granting 'loggedIn' behavior without account */}
         {view === "choice" && (
           <AuthChoiceCard
             onLogin={() => setView("login")}

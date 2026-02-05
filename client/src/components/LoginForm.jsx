@@ -48,6 +48,7 @@ export default function LoginForm({ goBack }) {
             className="form-control"
             id="email"
             placeholder="name@example.com"
+            value={loginData.email}
             onChange={handleLoginChange}
           ></input>
         </div>
@@ -61,6 +62,7 @@ export default function LoginForm({ goBack }) {
             className="form-control"
             id="password"
             placeholder=""
+            value={loginData.password}
             onChange={handleLoginChange}
           ></input>
         </div>
