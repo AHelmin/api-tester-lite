@@ -1,32 +1,46 @@
 import { useState, useEffect } from "react";
 
-export default function LoginForm({ goBack }) {
-  const [loginData, setLoginData] = useState({});
-  const [ formMessage, setFormMessage ] = useState("")
+// -Login form
+// -uses email and password to login
+// -submits to backend, handles errors, and returns 'home' upon success
 
-  function handleLoginChange(e){
-    setLoginData({...loginData, [e.target.name]: e.target.value})
+export default function LoginForm({ goBack }) {
+  //stores login information
+  const [loginData, setLoginData] = useState({});
+  //stores error messaging for the frontend, to be displayed upon error
+  const [formMessage, setFormMessage] = useState("");
+
+  // updates state for login information as the user types
+  function handleLoginChange(e) {
+    //restore form message upon login information change to remove error messaging
+    setFormMessage('');
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
   }
 
-  //
-  async function submitLogin(e){
-    e.preventDefault()
+  // -submits login information to server side
+  // -handles errors
+  // -redirects to 'home' with successful login
+  async function submitLogin(e) {
+    e.preventDefault();
     try {
       const query = await fetch("/api/user/login", {
         method: "POST",
         body: JSON.stringify(loginData),
         headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      const result = await query.json()
-      if( result.status === "error" ){
-        setFormMessage("We could not log you in with these credentials.")
+          "Content-Type": "application/json",
+        },
+      });
+      const result = await query.json();
+      //display generic error messages to remain ambiguouus for potential security threats
+      if (result.status === "error") {
+        setFormMessage("We could not log you in with these credentials.");
       } else {
-        window.location.href = "/"
+        //redirect 'home' with successful login
+        window.location.href = "/";
       }
-    } catch( err ) {
-      setFormMessage("We could not log you in with these credentials.")
+      //catch general network error
+    } catch (err) {
+      setFormMessage("We could not log you in with these credentials.");
     }
   }
 
@@ -66,13 +80,14 @@ export default function LoginForm({ goBack }) {
             onChange={handleLoginChange}
           ></input>
         </div>
-        <button type="submit" className="btn btn-primary">Login</button>
-        <button 
-        type="button" 
-        className="btn btn-link" 
-        onClick={goBack}
-        >Go Back</button>
+        <button type="submit" className="btn btn-primary">
+          Login
+        </button>
+        <button type="button" className="btn btn-link" onClick={goBack}>
+          Go Back
+        </button>
       </form>
+      {/* conditional render of error message */}
       {formMessage && <h4>{formMessage}</h4>}
     </>
   );
