@@ -3,6 +3,10 @@ import AuthChoiceCard from "./AuthChoiceCard";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 
+// -Parent card for the auth process
+// -default loads a choice of buttons to choose login, signup, or continue as guest
+// -also handles state isLoggedIn from parent component
+
 export default function AuthCard({ onAuthSuccess }) {
   const [view, setView] = useState("choice");
 
@@ -18,7 +22,7 @@ export default function AuthCard({ onAuthSuccess }) {
             onContinueAsGuest={onAuthSuccess}
           />
         )}
-        {/* load component based on state set by user choice */}
+        {/* load component based on state set by user choice if user chooses to authenticate */}
         {view === "login" && <LoginForm goBack={() => setView("choice")} />}
 
         {view === "signup" && <SignupForm goBack={() => setView("choice")} />}
