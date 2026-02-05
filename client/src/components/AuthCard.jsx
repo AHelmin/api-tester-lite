@@ -3,6 +3,7 @@ import AuthChoiceCard from "./AuthChoiceCard";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 
+// -AuthCard
 // -Parent card for the auth process
 // -default loads a choice of buttons to choose login, signup, or continue as guest
 // -also handles state isLoggedIn from parent component

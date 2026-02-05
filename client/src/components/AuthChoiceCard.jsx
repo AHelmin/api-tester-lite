@@ -1,3 +1,8 @@
+
+// -AuthChoiceCard
+// -child component for AuthCard
+// -Contains the buttons for user auth choice
+
 export default function AuthChoiceCard({ onLogin, onSignUp, onContinueAsGuest }) {
   return (
     <>

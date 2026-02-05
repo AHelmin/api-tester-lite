@@ -1,49 +1,65 @@
 import { useState } from "react";
 
-export default function RequestForm() {
-  const [open, setOpen] = useState(false);
-  const [method, setMethod] = useState("GET");
-  const [url, setUrl] = useState('');
-  const [results, setResults] = useState('');
-  const [requestBody, setRequestBody] = useState('');
-  const [bodyError, setBodyError] = useState('')
+// -RequestForm component
+// -handles API requests
+// -if loggedIn sends request to backend to store the request data
 
+export default function RequestForm() {
+  //stores request method drop down menu state
+  const [open, setOpen] = useState(false);
+  //stores request method type
+  const [method, setMethod] = useState("GET");
+  //stores url of api request
+  const [url, setUrl] = useState("");
+  //stores api request results, if not get, then tracks server response
+  const [results, setResults] = useState("");
+  //stores request body input
+  const [requestBody, setRequestBody] = useState("");
+  //stores if invalid JSON is entered into request body
+  const [bodyError, setBodyError] = useState("");
+
+  //Handles url change
   function handleUrlChange(e) {
     setUrl(e.target.value);
   }
 
+  //Handles request body, also sets bodyError to falsy
   function handleRequestBodyChange(e) {
     setRequestBody(e.target.value);
-    setBodyError('')
+    setBodyError("");
   }
 
+  //parses request body, valid json checking method
+  //returns null if parse error occurs
   function isValidJson(str) {
     try {
-     return JSON.parse(str);
+      return JSON.parse(str);
     } catch {
       return null;
     }
   }
 
+  //request handler
+  //univeral request function
+  //check if request body is needed then adds the options after a valid json check
   async function handleSend(e) {
     e.preventDefault();
     const options = { method };
-    //if POST or PUT then options need to be added
+    //checks if post or put so that additional options can be added to request
     if (method === "POST" || method === "PUT") {
       const parsed = isValidJson(requestBody);
-      console.log(parsed)
-
-        if (parsed === null) {
-            // **This needs to be changed, this error should never overwrite the requestbody, rahter a new message should 
-            //show up under the request body input
-            setBodyError('Please enter valid JSON');
-            return;
-        }
-
+      console.log(parsed);
+      // if invalid json, then sets error message to be rendered on frontend
+      if (parsed === null) {
+        setBodyError("Please enter valid JSON");
+        return;
+      }
+      //append required options to post or put request
       options.headers = { "Content-Type": "application/json" };
       options.body = JSON.stringify(parsed);
     }
-
+    //TODO: try catch blocks are needed here
+    
     const res = await fetch(url, options);
     const data = await res.json();
     setResults(data);
@@ -66,6 +82,7 @@ export default function RequestForm() {
                 >
                   {method}
                 </button>
+                {/* State used instead of Bootstrap JS to open or collapse menu */}
                 <ul className={`dropdown-menu ${open ? "show" : ""}`}>
                   <li>
                     <button
@@ -137,6 +154,7 @@ export default function RequestForm() {
                     onChange={handleRequestBodyChange}
                     value={requestBody}
                   ></textarea>
+                  {/* consditional render if invalid JSON is used in request body */}
                   {bodyError && <div className="text-danger">{bodyError}</div>}
                   {/* <label htmlFor="request-body">Must be valid JSON</label> */}
                 </div>
@@ -149,12 +167,13 @@ export default function RequestForm() {
             </li>
           </ul>
         </form>
-        <pre>{method}</pre>
+        {/* <pre>{method}</pre> */}
       </div>
-          <div className="row border border-light">
-            <h2>Results</h2>
-            {results && <pre>{JSON.stringify(results, null, 2)}</pre>}
-          </div> 
+      <div className="row border border-light">
+        <h2>Results</h2>
+        {/* display results of request as sent from url, standard formatting */}
+        {results && <pre>{JSON.stringify(results, null, 2)}</pre>}
+      </div>
     </>
   );
 }
