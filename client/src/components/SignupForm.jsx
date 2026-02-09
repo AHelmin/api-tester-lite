@@ -1,9 +1,18 @@
 import { useState, useEffect } from "react";
 
+//signup for component
+//uses name, email, and password to create account
+//submits to backend, handles errors, and returns 'home' upon success
+
 export default function SignupForm({ goBack }) {
+  //stores sign up information from input fields
   const [signUpData, setSignUpData] = useState("");
+  //stores error messages upon signup error
   const [formMessage, setFormMessage] = useState("")
 
+  //submits signup data to backend
+  //handles errors
+  //redirects to 'home' with successful login
   async function submitSignup(e) {
     e.preventDefault();
     try {
@@ -14,6 +23,7 @@ export default function SignupForm({ goBack }) {
           "Content-Type": "application/json",
         },
       }).catch((err) => {
+        //display generic error messages to remain ambiguouus for potential security threats
         setFormMessage("Sorry, we couldn't sign you up.");
       });
 
@@ -21,14 +31,18 @@ export default function SignupForm({ goBack }) {
       if (result.status === "error") {
         setFormMessage("Sorry, we couldn't sign you up.");
       } else {
+        //redirect 'home' with successful login
         window.location.href = "/";
       }
+      //catch general network error
     } catch (err) {
       setFormMessage("Sorry, we couldn't sign you up.");
     }
   }
 
+  //updates state for sign up information as the user types
   function handleSignupChange(e) {
+     //restore form message upon login information change to remove error message rendering
     setFormMessage('');
     setSignUpData({ ...signUpData, [e.target.name]: e.target.value });
   }
