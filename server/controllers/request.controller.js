@@ -30,7 +30,7 @@ export async function getAllUserRequests(userId){
     }
   }
 //Delete all requests by userId
-export async function deleteAllByuserId(userId){
+export async function deleteAllByUserId(userId){
     try {
       return await Request.deleteMany({ userId: userId });
     } catch(err){
