@@ -1,7 +1,7 @@
-import express from './express'
+import express from 'express'
 import { createUser, handleLogin } from '../../controllers/user.controller.js'
 
-const router = express.router();
+const router = express.Router();
 
 router.post("/", async (req, res) => {
     try {
