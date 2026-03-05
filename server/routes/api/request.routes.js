@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
     console.log(err.message)
     res.status(500).json({ status: "error", payload: err.message })
   }
-})
+});
 
 router.delete("/:id", async (req, res) => {
   try {
@@ -38,14 +38,16 @@ router.delete("/:id", async (req, res) => {
     console.log(err.message)
     res.status(500).json({ status: "error", payload: err.message })
   }
-})
+});
 
 router.delete("/:userid", async (req, res) => {
   try {
-    const payload = await deleteRequestById(req.params.userid)
+    const payload = await deleteAllByUserId(req.params.userid)
     res.status(200).json({ status: "success", payload })
   }catch(err){
     console.log(err.message)
     res.status(500).json({ status: "error", payload: err.message })
   }
-})
+});
+
+export default router;

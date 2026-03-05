@@ -22,3 +22,5 @@ router.post("/", async (req, res) => {
       res.status(401).json({ status: "error", payload: "Could not authorize." })
     }
   });
+
+  export default router;

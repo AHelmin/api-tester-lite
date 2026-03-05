@@ -1,0 +1,25 @@
+{
+  "name": "api-tester-lite",
+  "version": "1.0.0",
+  "description": "API Tester Lite is a work-in-progress web application designed to provide an interface for testing REST APIs directly in the browser.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AHelmin/api-tester-lite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AHelmin/api-tester-lite/issues"
+  },
+  "homepage": "https://github.com/AHelmin/api-tester-lite#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
