@@ -6,7 +6,11 @@ import { useState, useEffect } from "react";
 
 export default function SignupForm({ goBack }) {
   //stores sign up information from input fields
-  const [signUpData, setSignUpData] = useState("");
+  const [signUpData, setSignUpData] = useState({ 
+    username: '',
+    email: '',
+    password: ''
+  });
   //stores error messages upon signup error
   const [formMessage, setFormMessage] = useState("")
 
@@ -47,9 +51,9 @@ export default function SignupForm({ goBack }) {
     setSignUpData({ ...signUpData, [e.target.name]: e.target.value });
   }
 
-  // useEffect(() => {
-  //   console.log(signUpData)
-  // },[signUpData])
+  useEffect(() => {
+    console.log(signUpData)
+  },[signUpData])
 
   return (
     <>
@@ -60,8 +64,8 @@ export default function SignupForm({ goBack }) {
             Username
           </label>
           <input
-            type="name"
-            name="name"
+            type="text"
+            name="username"
             className="form-control"
             id="name"
             placeholder="name"
