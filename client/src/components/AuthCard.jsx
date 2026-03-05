@@ -24,9 +24,9 @@ export default function AuthCard({ onAuthSuccess }) {
           />
         )}
         {/* load component based on state set by user choice if user chooses to authenticate */}
-        {view === "login" && <LoginForm goBack={() => setView("choice")} />}
+        {view === "login" && <LoginForm onAuthSuccess={onAuthSuccess} goBack={() => setView("choice")} />}
 
-        {view === "signup" && <SignupForm goBack={() => setView("choice")} />}
+        {view === "signup" && <SignupForm onAuthSuccess={onAuthSuccess} goBack={() => setView("choice")} />}
       </div>
     </>
   );

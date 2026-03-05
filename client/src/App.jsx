@@ -6,7 +6,7 @@ import "/node_modules/bootstrap/dist/css/bootstrap.min.css";
 function App() {
   // Controls if the small screen navbar dropdown menu is open
   const [openNav, setOpenNav] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [view, setView] = useState('home')
 
   return (

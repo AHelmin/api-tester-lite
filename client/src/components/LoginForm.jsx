@@ -4,11 +4,14 @@ import { useState, useEffect } from "react";
 // -uses email and password to login
 // -submits to backend, handles errors, and returns 'home' upon success
 
-export default function LoginForm({ goBack }) {
+export default function LoginForm({ onAuthSuccess, goBack }) {
   //stores login information
-  const [loginData, setLoginData] = useState({});
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: ""
+  });
   //stores error messaging for the frontend, to be displayed upon error
-  const [formMessage, setFormMessage] = useState("");
+  const [formMessage, setFormMessage] = useState();
 
   // updates state for login information as the user types
   function handleLoginChange(e) {
@@ -31,12 +34,13 @@ export default function LoginForm({ goBack }) {
         },
       });
       const result = await query.json();
+      
       //display generic error messages to remain ambiguouus for potential security threats
       if (result.status === "error") {
         setFormMessage("We could not log you in with these credentials.");
       } else {
-        //redirect 'home' with successful login
-        window.location.href = "/";
+        //if success then set logged in state to true, request component load
+        onAuthSuccess();
       }
       //catch general network error
     } catch (err) {
