@@ -1,7 +1,7 @@
 import { User } from "../models/User.js";
 import bcrypt from "bcrypt";
 
-//TODO: need sign up controller
+// sign up controller
 export async function createUser(data) {
   const hash = await bcrypt.hash(data.password, 10);
   const userData = { ...data, password: hash };
@@ -12,7 +12,7 @@ export async function createUser(data) {
     throw new Error(err);
   }
 };
-//TODO: need login controller
+// login controller
 export async function handleLogin(email, pw){
     let foundUser 
   
@@ -30,7 +30,7 @@ export async function handleLogin(email, pw){
       throw new Error("Password failed")
     }
   //remove password before response for security reasons
-    const { password, ...modifiedUser } = foundUser
+    const { password, ...modifiedUser } = foundUser.toObject();
     return modifiedUser
   };
 //TODO: logout controller(likely will need to be handled here since I will be checking loggedIn from backend)

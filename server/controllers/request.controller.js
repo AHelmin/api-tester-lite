@@ -2,7 +2,7 @@ import { Request } from '../models/Request.js'
   
   
 
- //TODO: POST new request(tagged with user info)
+ // POST new request(tagged with user info)
  export async function createRequest(data){
     try {
       return await Request.create(data);
@@ -11,7 +11,7 @@ import { Request } from '../models/Request.js'
       throw new Error(err)
     }
   }
- //TODO: GET history(limit sotred history to 10)
+ // GET history(limit sotred history to 10)
 export async function getAllUserRequests(userId){
     try {
       return await Request.find({ userId: userId });
@@ -20,7 +20,7 @@ export async function getAllUserRequests(userId){
       throw new Error(err)
     }
   }
- //TODO: DELETE item/ or delete all?
+ // DELETE item/ or delete all?
  export async function deleteRequestById(id){
     try {
       return await Request.findByIdAndDelete(id);

@@ -12,6 +12,7 @@ const requestSchema = new mongoose.Schema({
   headers: {
     type: Object,
     default: {},
+    required: false,
   },
   body: {
     type: String,

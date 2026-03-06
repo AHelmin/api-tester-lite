@@ -47,16 +47,22 @@ export default function RequestForm() {
       method: options.method,
       url: url,
       headers: options.headers || {},
-      body: options.body || null
+      body: options.body || null,
     };
-
-    await fetch('/api/request', {
-      method: 'POST',
-      headers: {
-        "Content-Type" : "application/json"
-      },
-      body: JSON.stringify(requestData)
-    });
+    console.log(requestData);
+    try {
+      await fetch("/api/request", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+      const result = await res.json()
+      console.log("Backend response:", result);
+    } catch (err) {
+      console.error("Error", err.message);
+    }
   }
 
   //request handler
@@ -68,7 +74,7 @@ export default function RequestForm() {
     //checks if post or put so that additional options can be added to request
     if (method === "POST" || method === "PUT") {
       const parsed = isValidJson(requestBody);
-      console.log(parsed);
+      
       // if invalid json, then sets error message to be rendered on frontend
       if (parsed === null) {
         setBodyError("Please enter valid JSON");
@@ -79,13 +85,13 @@ export default function RequestForm() {
       options.body = JSON.stringify(parsed);
     }
     //TODO: try catch blocks are needed here
-    
+
     const res = await fetch(url, options);
     const data = await res.json();
     setResults(data);
-
+  
     await storeRequest(url, options);
-  };
+  }
 
   return (
     <>

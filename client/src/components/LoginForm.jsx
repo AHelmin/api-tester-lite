@@ -34,6 +34,7 @@ export default function LoginForm({ onAuthSuccess, goBack }) {
         },
       });
       const result = await query.json();
+      console.log(result)
       
       //display generic error messages to remain ambiguouus for potential security threats
       if (result.status === "error") {
