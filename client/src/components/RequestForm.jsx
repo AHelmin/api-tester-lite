@@ -39,6 +39,26 @@ export default function RequestForm() {
     }
   }
 
+  //request store function
+  //creates necessary body to be sent to db for storage
+
+  async function storeRequest(url, options) {
+    const requestData = {
+      method: options.method,
+      url: url,
+      headers: options.headers || {},
+      body: options.body || null
+    };
+
+    await fetch('/api/request', {
+      method: 'POST',
+      headers: {
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify(requestData)
+    });
+  }
+
   //request handler
   //univeral request function
   //check if request body is needed then adds the options after a valid json check
@@ -63,7 +83,9 @@ export default function RequestForm() {
     const res = await fetch(url, options);
     const data = await res.json();
     setResults(data);
-  }
+
+    await storeRequest(url, options);
+  };
 
   return (
     <>

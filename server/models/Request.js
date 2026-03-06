@@ -9,6 +9,10 @@ const requestSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  headers: {
+    type: Object,
+    default: {},
+  },
   body: {
     type: String,
     required: false,
