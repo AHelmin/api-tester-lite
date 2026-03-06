@@ -6,7 +6,9 @@ export async function createUser(data) {
   const hash = await bcrypt.hash(data.password, 10);
   const userData = { ...data, password: hash };
   try {
-    return await User.create(userData);
+    const user = await User.create(userData);
+    const { password, ...safeUser } = newUser.toObject();
+    return safeUser;
   } catch (err) {
     console.log(err.message);
     throw new Error(err);
