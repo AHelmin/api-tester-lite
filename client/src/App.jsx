@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RequestForm, AuthCard, History } from "./components";
 // import './App.css'
 import "/node_modules/bootstrap/dist/css/bootstrap.min.css";
@@ -8,6 +8,18 @@ function App() {
   const [openNav, setOpenNav] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [view, setView] = useState('home')
+
+useEffect(() => {
+  if (localStorage.getItem('userInfo')) {
+    setIsLoggedIn(true)
+  }
+}, [])
+
+function logout() {
+  if (localStorage.getItem('userInfo')) {
+  localStorage.removeItem('userInfo')
+} else setIsLoggedIn(false)
+}
 
   return (
     <>
@@ -53,7 +65,7 @@ function App() {
                   <button
                     type="button"
                     className="btn btn-link"
-                    onClick={() => setIsLoggedIn(false)}
+                    onClick={logout}
                   >
                     Logout
                   </button>

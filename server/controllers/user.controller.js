@@ -7,7 +7,7 @@ export async function createUser(data) {
   const userData = { ...data, password: hash };
   try {
     const user = await User.create(userData);
-    const { password, ...safeUser } = newUser.toObject();
+    const { password, ...safeUser } = user.toObject();
     return safeUser;
   } catch (err) {
     console.log(err.message);

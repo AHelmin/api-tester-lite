@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 //uses name, email, and password to create account
 //submits to backend, handles errors, and returns 'home' upon success
 
-export default function SignupForm({ onAuthSuccess, goBack }) {
+export default function SignupForm({ goBack }) {
   //stores sign up information from input fields
   const [signUpData, setSignUpData] = useState({ 
     username: '',
@@ -32,15 +32,17 @@ export default function SignupForm({ onAuthSuccess, goBack }) {
       });
 
       const result = await query.json();
+      console.log(result.status)
       //if success then set logged in state to true
       if (result.status === 'success') {
+        localStorage.setItem('userInfo', JSON.stringify(result.payload))
         onAuthSuccess();
       };
       if (result.status === "error") {
         setFormMessage("Sorry, we couldn't sign you up.");
       } else {
-         //if success then set logged in state to true, request component load
-         onAuthSuccess();
+          //if success then create entry for localStorage called userInfo
+        localStorage.setItem('userInfo', JSON.stringify(result.payload))
       }
       //catch general network error
     } catch (err) {
@@ -55,9 +57,9 @@ export default function SignupForm({ onAuthSuccess, goBack }) {
     setSignUpData({ ...signUpData, [e.target.name]: e.target.value });
   }
 
-  useEffect(() => {
-    console.log(signUpData)
-  },[signUpData])
+  // useEffect(() => {
+  //   console.log(signUpData)
+  // },[])
 
   return (
     <>
