@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 // -uses email and password to login
 // -submits to backend, handles errors, and returns 'home' upon success
 
-export default function LoginForm({ goBack }) {
+export default function LoginForm({ setUserInfo, goBack }) {
   //stores login information
   const [loginData, setLoginData] = useState({
     email: "",
@@ -41,7 +41,8 @@ export default function LoginForm({ goBack }) {
         setFormMessage("We could not log you in with these credentials.");
       } else {
         //if success then create entry for localStorage called userInfo
-        localStorage.setItem('userInfo', JSON.stringify(result.payload))
+        localStorage.setItem('userInfo', JSON.stringify(result.payload));
+        setUserInfo(result.payload);
       }
       //catch general network error
     } catch (err) {

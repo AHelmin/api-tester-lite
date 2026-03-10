@@ -8,7 +8,7 @@ import SignupForm from "./SignupForm";
 // -default loads a choice of buttons to choose login, signup, or continue as guest
 // -also handles state isLoggedIn from parent component
 
-export default function AuthCard({ onAuthSuccess }) {
+export default function AuthCard({ setUserInfo, onAuthSuccess }) {
   const [view, setView] = useState("choice");
 
   return (
@@ -24,9 +24,9 @@ export default function AuthCard({ onAuthSuccess }) {
           />
         )}
         {/* load component based on state set by user choice if user chooses to authenticate */}
-        {view === "login" && <LoginForm goBack={() => setView("choice")} />}
+        {view === "login" && <LoginForm setUserInfo={setUserInfo} goBack={() => setView("choice")} />}
 
-        {view === "signup" && <SignupForm goBack={() => setView("choice")} />}
+        {view === "signup" && <SignupForm setUserInfo={setUserInfo} goBack={() => setView("choice")} />}
       </div>
     </>
   );

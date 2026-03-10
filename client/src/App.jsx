@@ -6,20 +6,23 @@ import "/node_modules/bootstrap/dist/css/bootstrap.min.css";
 function App() {
   // Controls if the small screen navbar dropdown menu is open
   const [openNav, setOpenNav] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [view, setView] = useState('home')
+  const [view, setView] = useState('home');
+  const [userInfo, setUserInfo] = useState(null);
+
+  const isLoggedIn = !!userInfo;
 
 useEffect(() => {
-  if (localStorage.getItem('userInfo')) {
-    setIsLoggedIn(true)
+  const storedUser = JSON.parse(localStorage.getItem('userInfo'))
+  if (storedUser) {
+    setUserInfo(storedUser);
   }
-}, [])
+}, [userInfo])
 
 function logout() {
   if (localStorage.getItem('userInfo')) {
-  localStorage.removeItem('userInfo')
-} else setIsLoggedIn(false)
-}
+  localStorage.removeItem('userInfo');
+  setUserInfo(null);
+}}
 
   return (
     <>
@@ -78,7 +81,7 @@ function logout() {
       <div className="container text-center container-fluid">
         <div className="row justify-content-center">
           {/* Controls which component loads based on state */}
-          {!isLoggedIn && <AuthCard onAuthSuccess={() => setIsLoggedIn(true)} />}
+          {!isLoggedIn && <AuthCard setUserInfo={setUserInfo} onAuthSuccess={() => setIsLoggedIn(true)} />}
           {isLoggedIn && view === 'home' && <RequestForm />}
           {isLoggedIn && view ==='history' && <History />}
         </div>
