@@ -20,7 +20,7 @@ export default function AuthCard({ setUserInfo, onAuthSuccess }) {
           <AuthChoiceCard
             onLogin={() => setView("login")}
             onSignUp={() => setView("signup")}
-            onContinueAsGuest={onAuthSuccess}
+            onContinueAsGuest={onContinueAsGuest}
           />
         )}
         {/* load component based on state set by user choice if user chooses to authenticate */}

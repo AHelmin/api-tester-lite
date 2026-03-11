@@ -4,7 +4,7 @@ import { useState } from "react";
 // -handles API requests
 // -if loggedIn sends request to backend to store the request data
 
-export default function RequestForm() {
+export default function RequestForm({ userInfo }) {
   //stores request method drop down menu state
   const [open, setOpen] = useState(false);
   //stores request method type
@@ -48,6 +48,7 @@ export default function RequestForm() {
       url: url,
       headers: options.headers || {},
       body: options.body || null,
+      userId: userInfo._id,
     };
     console.log(requestData);
     try {
@@ -90,7 +91,10 @@ export default function RequestForm() {
     const data = await res.json();
     setResults(data);
   
+    //if the userData is not a guest account, call the request storage function
+    if (!userInfo.guest) {
     await storeRequest(url, options);
+  }
   }
 
   return (

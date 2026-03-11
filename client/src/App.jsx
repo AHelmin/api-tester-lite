@@ -81,8 +81,8 @@ function logout() {
       <div className="container text-center container-fluid">
         <div className="row justify-content-center">
           {/* Controls which component loads based on state */}
-          {!isLoggedIn && <AuthCard setUserInfo={setUserInfo} onAuthSuccess={() => setIsLoggedIn(true)} />}
-          {isLoggedIn && view === 'home' && <RequestForm />}
+          {!isLoggedIn && <AuthCard setUserInfo={setUserInfo} onContinueAsGuest={() => setUserInfo({ guest: true })} />}
+          {isLoggedIn && view === 'home' && <RequestForm userInfo={userInfo} />}
           {isLoggedIn && view ==='history' && <History />}
         </div>
       </div>
