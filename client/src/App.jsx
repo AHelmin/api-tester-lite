@@ -16,7 +16,7 @@ useEffect(() => {
   if (storedUser) {
     setUserInfo(storedUser);
   }
-}, [userInfo])
+}, [])
 
 function logout() {
   if (localStorage.getItem('userInfo')) {
@@ -83,7 +83,7 @@ function logout() {
           {/* Controls which component loads based on state */}
           {!isLoggedIn && <AuthCard setUserInfo={setUserInfo} onContinueAsGuest={() => setUserInfo({ guest: true })} />}
           {isLoggedIn && view === 'home' && <RequestForm userInfo={userInfo} />}
-          {isLoggedIn && view ==='history' && <History />}
+          {isLoggedIn && view ==='history' && <History userInfo={userInfo} />}
         </div>
       </div>
       <footer className="bg-body-tertiary text-center py-3">

@@ -8,7 +8,7 @@ import SignupForm from "./SignupForm";
 // -default loads a choice of buttons to choose login, signup, or continue as guest
 // -also handles state isLoggedIn from parent component
 
-export default function AuthCard({ setUserInfo, onAuthSuccess }) {
+export default function AuthCard({ setUserInfo, onContinueAsGuest }) {
   const [view, setView] = useState("choice");
 
   return (

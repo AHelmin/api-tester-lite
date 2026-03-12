@@ -59,7 +59,7 @@ export default function RequestForm({ userInfo }) {
         },
         body: JSON.stringify(requestData),
       });
-      const result = await res.json()
+      const result = await res.json();
       console.log("Backend response:", result);
     } catch (err) {
       console.error("Error", err.message);
@@ -75,7 +75,7 @@ export default function RequestForm({ userInfo }) {
     //checks if post or put so that additional options can be added to request
     if (method === "POST" || method === "PUT") {
       const parsed = isValidJson(requestBody);
-      
+
       // if invalid json, then sets error message to be rendered on frontend
       if (parsed === null) {
         setBodyError("Please enter valid JSON");
@@ -90,11 +90,11 @@ export default function RequestForm({ userInfo }) {
     const res = await fetch(url, options);
     const data = await res.json();
     setResults(data);
-  
+
     //if the userData is not a guest account, call the request storage function
     if (!userInfo.guest) {
-    await storeRequest(url, options);
-  }
+      await storeRequest(url, options);
+    }
   }
 
   return (

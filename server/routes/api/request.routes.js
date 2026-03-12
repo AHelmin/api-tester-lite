@@ -10,9 +10,9 @@ import {
 const router = express.Router();
 
 
-router.get("/", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
-    const payload = await getAllUserRequests()
+    const payload = await getAllUserRequests(req.params.id)
     res.status(200).json({ status: "success", payload })
   }catch(err){
     console.log(err.message)
