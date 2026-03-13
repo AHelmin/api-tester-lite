@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 // TO DO: authenticate isLoggedIn, if true fetch all requests(up to 10) from db and list here,
 //if !loggedIn, display message about creating account to save requests
 
-export default function History({ userInfo, method, setMethod, url, setUrl, requestBody, setRequestBody }) {
+export default function History({ userInfo, setMethod, setUrl, setRequestBody, setView }) {
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
@@ -27,17 +27,14 @@ export default function History({ userInfo, method, setMethod, url, setUrl, requ
       {!history ? (
         <h1>Please signup or login to save your API requests!</h1>
       ) : (
-        <ul>
+        <ul className="list-group">
           {history.map((req) => (
-            <li key={req._id}>
+            <li className="list-group-item" key={req._id}>
               <p>
                 <strong>Method:</strong> {req.method}
               </p>
               <p>
                 <strong>URL:</strong> {req.url}
-              </p>
-              <p>
-                <strong>Created:</strong> {req.createdAt}
               </p>
               {req.body && (
                 <div>
@@ -45,6 +42,18 @@ export default function History({ userInfo, method, setMethod, url, setUrl, requ
                   <pre>{req.body}</pre>
                 </div>
               )}
+              <p>
+                <strong>Created:</strong> {req.createdAt}
+              </p>
+              <button className="btn btn-primary" onClick={ () => {
+                setMethod(req.method)
+                setUrl(req.url)
+                setRequestBody(req.body || "")
+                setView("home")
+              }}
+              >
+                Call API Again
+                </button>
             </li>
           ))}
         </ul>

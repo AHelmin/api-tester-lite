@@ -109,6 +109,7 @@ function App() {
           setUrl={setUrl}
           requestBody={requestBody}
           setRequestBody={setRequestBody}
+          setView={setView}
           />}
         </div>
       </div>
