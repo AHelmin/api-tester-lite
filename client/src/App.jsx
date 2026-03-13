@@ -6,23 +6,28 @@ import "/node_modules/bootstrap/dist/css/bootstrap.min.css";
 function App() {
   // Controls if the small screen navbar dropdown menu is open
   const [openNav, setOpenNav] = useState(false);
-  const [view, setView] = useState('home');
+  const [view, setView] = useState("home");
   const [userInfo, setUserInfo] = useState(null);
+  //stores request method type
+  const [method, setMethod] = useState("GET");
+  //stores url of api request
+  const [url, setUrl] = useState("");
+  //stores request body input
+  const [requestBody, setRequestBody] = useState("");
 
   const isLoggedIn = !!userInfo;
 
-useEffect(() => {
-  const storedUser = JSON.parse(localStorage.getItem('userInfo'))
-  if (storedUser) {
-    setUserInfo(storedUser);
-  }
-}, [])
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("userInfo"));
+    if (storedUser) {
+      setUserInfo(storedUser);
+    }
+  }, []);
 
-function logout() {
-  if (localStorage.getItem('userInfo')) {
-  localStorage.removeItem('userInfo');
-  setUserInfo(null);
-}}
+  function logout() {
+    localStorage.removeItem("userInfo");
+    setUserInfo(null);
+  }
 
   return (
     <>
@@ -48,18 +53,18 @@ function logout() {
               <ul className="navbar-nav ms-auto">
                 <li className="nav-item">
                   <button
-                  type="button"
-                  className="btn"
-                  onClick={() => setView('home')}
+                    type="button"
+                    className="btn"
+                    onClick={() => setView("home")}
                   >
                     Home
                   </button>
                 </li>
                 <li className="nav-item">
-                <button
-                  type="button"
-                  className="btn"
-                  onClick={() => setView('history')}
+                  <button
+                    type="button"
+                    className="btn"
+                    onClick={() => setView("history")}
                   >
                     History
                   </button>
@@ -81,9 +86,30 @@ function logout() {
       <div className="container text-center container-fluid">
         <div className="row justify-content-center">
           {/* Controls which component loads based on state */}
-          {!isLoggedIn && <AuthCard setUserInfo={setUserInfo} onContinueAsGuest={() => setUserInfo({ guest: true })} />}
-          {isLoggedIn && view === 'home' && <RequestForm userInfo={userInfo} />}
-          {isLoggedIn && view ==='history' && <History userInfo={userInfo} />}
+          {!isLoggedIn && (
+            <AuthCard
+              setUserInfo={setUserInfo}
+              onContinueAsGuest={() => setUserInfo({ guest: true })}
+            />
+          )}
+          {isLoggedIn && view === "home" && <RequestForm 
+          userInfo={userInfo} 
+          method={method}
+          setMethod={setMethod}
+          url={url}
+          setUrl={setUrl}
+          requestBody={requestBody}
+          setRequestBody={setRequestBody}
+          />}
+          {isLoggedIn && view === "history" && <History 
+          userInfo={userInfo} 
+          method={method}
+          setMethod={setMethod}
+          url={url}
+          setUrl={setUrl}
+          requestBody={requestBody}
+          setRequestBody={setRequestBody}
+          />}
         </div>
       </div>
       <footer className="bg-body-tertiary text-center py-3">

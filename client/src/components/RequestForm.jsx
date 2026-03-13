@@ -4,17 +4,11 @@ import { useState } from "react";
 // -handles API requests
 // -if loggedIn sends request to backend to store the request data
 
-export default function RequestForm({ userInfo }) {
+export default function RequestForm({ userInfo, method, setMethod, url, setUrl, requestBody, setRequestBody }) {
   //stores request method drop down menu state
   const [open, setOpen] = useState(false);
-  //stores request method type
-  const [method, setMethod] = useState("GET");
-  //stores url of api request
-  const [url, setUrl] = useState("");
   //stores api request results, if not get, then tracks server response
   const [results, setResults] = useState("");
-  //stores request body input
-  const [requestBody, setRequestBody] = useState("");
   //stores if invalid JSON is entered into request body
   const [bodyError, setBodyError] = useState("");
 
