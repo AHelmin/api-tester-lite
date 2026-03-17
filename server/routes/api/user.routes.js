@@ -6,7 +6,13 @@ const router = express.Router();
 
 // tokens are encrypted non-invasive data about the user
 function createToken(id) {
-  return jwt.sign({ id: id }, process.env.JWT_SECRET);
+  return jwt.sign(
+    {
+      id: id,
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: "1h" }
+  );
 }
 
 router.post("/", async (req, res) => {
@@ -17,9 +23,9 @@ router.post("/", async (req, res) => {
       .status(200)
       .cookie("auth_token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
+        secure: process.env.NODE_ENV === "production",
         maxAge: 3600000,
-        sameSite: 'lax'
+        sameSite: "lax",
       })
       .json({ status: "success", payload });
   } catch (err) {
@@ -36,9 +42,9 @@ router.post("/login", async (req, res) => {
       .status(200)
       .cookie("auth_token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
+        secure: process.env.NODE_ENV === "production",
         maxAge: 3600000,
-        sameSite: 'lax'
+        sameSite: "lax",
       })
       .json({ status: "success", payload });
   } catch (err) {
