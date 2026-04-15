@@ -4,7 +4,10 @@ export function requireAuth(req,res,next) {
     const token = req.cookies.auth_cookie;
 
     if (!token) {
-        return res.status(401).json({ status: 'error'});
+        return res.status(401).json({ 
+            status: 'error',
+        payload: 'Not Authenticated'
+    });
     }
     
     try {
@@ -12,7 +15,10 @@ export function requireAuth(req,res,next) {
         req.user = decoded;
         next();
     } catch(err) {
-        return res.status(401).json({ status: 'error', message: err.message})
+        return res.status(401).json({ 
+            status: 'error', 
+            payload: 'Invalid Token'
+        });
     }
 
 }
