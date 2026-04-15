@@ -1,6 +1,8 @@
 import express from "express";
 import { createUser, handleLogin } from "../../controllers/user.controller.js";
 import jwt from "jsonwebtoken";
+import User from '../../models/User.js'
+import { requireAuth } from "../../middleware/requireAuth.js";
 
 const router = express.Router();
 
@@ -50,6 +52,22 @@ router.post("/login", async (req, res) => {
   } catch (err) {
     console.log(err.message);
     res.status(401).json({ status: "error", payload: "Could not authorize." });
+  }
+});
+
+router.get("/me", requireAuth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+
+    res.json({
+      status: "success",
+      payload: user
+    });
+  } catch(err) {
+      res.status(500).json ({
+        status: "error",
+        payload: "Server error"
+      });
   }
 });
 
