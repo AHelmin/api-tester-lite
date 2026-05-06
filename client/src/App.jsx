@@ -24,6 +24,24 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    async function checkAuth() {
+      try {
+        const res = await fetch('/api/user/me', {
+          credentials: 'include'
+        })
+
+        if(!res.ok) throw new Error();
+
+        const data = await res.json();
+        setUserInfo(data.payload);
+      } catch {
+        setUserInfo(null);
+      } 
+    }
+    checkAuth();
+  }, []);
+
   function logout() {
     localStorage.removeItem("userInfo");
     setUserInfo(null);
