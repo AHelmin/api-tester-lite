@@ -1,7 +1,7 @@
 import express from "express";
 import { createUser, handleLogin } from "../../controllers/user.controller.js";
 import jwt from "jsonwebtoken";
-import User from '../../models/User.js'
+import { User } from '../../models/User.js'
 import { requireAuth } from "../../middleware/requireAuth.js";
 
 const router = express.Router();
