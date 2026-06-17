@@ -18,13 +18,6 @@ function App() {
   const isLoggedIn = !!userInfo;
 
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("userInfo"));
-    if (storedUser) {
-      setUserInfo(storedUser);
-    }
-  }, []);
-
-  useEffect(() => {
     async function checkAuth() {
       try {
         const res = await fetch('/api/user/me', {
@@ -42,9 +35,18 @@ function App() {
     checkAuth();
   }, []);
 
-  function logout() {
-    localStorage.removeItem("userInfo");
-    setUserInfo(null);
+  async function logout() {
+    try {
+      await fetch("/api/user/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch (err) {
+      console.error("Logout failed:", err);
+    } finally {
+      setUserInfo(null);
+      setView("home");
+    }
   }
 
   return (
