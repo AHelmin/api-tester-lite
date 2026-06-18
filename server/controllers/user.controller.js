@@ -35,4 +35,6 @@ export async function handleLogin(email, pw){
     const { password, ...modifiedUser } = foundUser.toObject();
     return modifiedUser
   };
-//TODO: logout controller(likely will need to be handled here since I will be checking loggedIn from backend)
+
+//logout controller - all logic found in user.routes
+

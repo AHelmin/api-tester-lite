@@ -15,8 +15,10 @@ function App() {
   //stores request body input
   const [requestBody, setRequestBody] = useState("");
 
+  //define isLoggedIn as the truthy/falsy of userInfo state
   const isLoggedIn = !!userInfo;
 
+  //check auth from backend on mount
   useEffect(() => {
     async function checkAuth() {
       try {
@@ -35,6 +37,7 @@ function App() {
     checkAuth();
   }, []);
 
+  //logout function 
   async function logout() {
     try {
       await fetch("/api/user/logout", {
